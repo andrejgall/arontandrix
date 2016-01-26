@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<TrackingData>
+	<Sensors>
+		<Sensor Type="EdgeBasedInitializationSensorSource">
+			<SensorID>EdgeBasedInitializationSensorSource_0</SensorID>
+			<Parameters>
+				<!-- Surface model of the object.
+					 It can contain only triangles. Model scale has to be in [mm].
+				-->
+				<TriangleMesh>SurfaceModel.obj</TriangleMesh>	
+				
+				<!-- Specifies which sensors are used to create initial pose:
+					 "off",				<=> Use given tracking configuration and neither of GPS, gravity or compass
+					 "gravity",			<=> Use gravity/accelerometer if available
+					 "gravity_compass"	<=> Use gravity/accelerometer and compass if available
+					 "all"				<=> Use gravity, compass and GPS if available
+				-->
+				<UseSensorsForPoseCreation>gravity</UseSensorsForPoseCreation>	  
+
+				<!-- Enable/disable initialization testing mode. If set to 'true', then tracking will be disabled.
+				-->
+				<InitializationTestMode>false</InitializationTestMode>
+				
+				<!-- Lat/Long coordinates of the origin.
+					 This information is used, and has to be given, when <UseSensorsForPoseCreation> = "all".
+				-->
+				<!--
+				<OriginCoordinates>
+					<Latitude>0.0</Latitude>
+					<Longitude>0.0</Longitude>
+				</OriginCoordinates>
+				-->
+				
+				<!-- Specifies the initial transformation, to be applied to world coordinate system (object),
+					 prior any transformations originating from the sensors.
+					 It is used only when <UseSensorsForPoseCreation> = "gravity" or "off"
+				-->
+				<TrackingConfiguration>InitialPose.xml</TrackingConfiguration>
+				
+				<!-- Parameters for setting pose space exploration during the Edge-based initialization.
+				-->
+				<AutoInit>
+					<!-- Type of pose space exploration:
+						 "off"		<=> Pose space exploration is disabled.
+						 "custom"	<=> Custom pose space exploration. All parameters have to be given manually.
+						 "indoor"	<=> Pre-set indoor pose space exploration.
+						 "outdoor"	<=> Pre-set outdoor pose space exploration.
+					-->
+					<PresetType>indoor</PresetType>
+				</AutoInit>
+				
+				<EdgeAlignment>
+					<!-- Line model of the object. It has to be in the same coordinate system of the <TriangleMesh> model, and perfectly aligned with it.
+						Obj file containing only vertices and lines. Model scale has to be in [mm].
+					-->
+					<LineModel>LineModel.obj</LineModel>
+					
+					<!-- Minimum quality threshold. It has to be between 0 and 1.
+						 Meaningful values are between 0.55 and 0.85. Default = 0.65.
+					-->
+					<MinQuality>0.7</MinQuality>
+					
+					<!-- Max. search range length. It should be adapted relative to the model size.
+						 This value is set in [mm]. It has to be greater than 0.
+					-->
+					<SearchRange>50.0</SearchRange>
+					
+					<!-- Number of features to be used.
+						 This parameter directly influences sensor response. More features will induce higher accuracy, with the lower framerate, and vice-versa.
+						 The lower bound for this parameter is 30. Ideally it should be no less than 100, in case a target device can handle a computational cost.
+					-->
+					<NumFeatures>1000</NumFeatures>
+					
+					<!-- Visibility testing parameters	-->
+					<VisibilityTest>
+						<!-- Specifies if visibility testing should be used. It is only required where there might be a significant degree of self occlusion in the model.
+							 "off"	<=> All lines of the line model will be assumed visible all the time.
+							 "on"	<=> The surface model is used to determine visibility of lines by occlusion.
+						-->
+						<Enabled>on</Enabled>
+						<!-- Specifies the density of the visibility test between 0.001 and 1.0. Typically a rate of 0.2 produces an accuracy of ~98% while saving ~80% computation time. 
+							 With a significantly higher amount of <NumFeatures> the rate can be reduced accordingly to 0.1 or less to further reduce computational cost.
+							 Only used if the visibility test is enabled.
+						-->
+						<TestRate>0.2</TestRate>
+					</VisibilityTest>
+				</EdgeAlignment>
+				<!-- Parameters for Markerless 3D feature tracking following Edge Based Initialization -->
+				<FeatureTracking>
+					<!-- Orientation assigned to the features (regular, gravity, upright) -->
+					<FeatureOrientationAssignment>gravity</FeatureOrientationAssignment>
+					<!-- Parameters for FeatureBasedSensorSource's <SensorCOS/Parameters> node. 
+						 Should only contain <MinMatches>, <NumExtensibleFeatures> and <MinTriangulationAngle>. Other parameters are added by the EdgeBasedInitializationSensorSource automatically. 
+						 The generated parameters will be discarded if the node is already specified here. -->
+					<Parameters>
+						<!-- Specifies the map building strategy for Markerless 3D tracking following a successful Edge Based Initialization:
+							"narrow": limited tracking range, higher accuracy,
+							"wide": wide tracking range, lower accuracy
+						-->
+						<MapExtensionMethod>narrow</MapExtensionMethod>
+						<MinMatches>30</MinMatches>
+						<NumExtensibleFeatures>30000</NumExtensibleFeatures>
+						<MinTriangulationAngle>3</MinTriangulationAngle>
+						<SimilarityThreshold>0.7</SimilarityThreshold>
+						<MinNumberOfObservations>3</MinNumberOfObservations>
+					</Parameters>
+				</FeatureTracking>
+			</Parameters>
+			<!-- COS 1 Name -->
+			<SensorCOS>
+				<SensorCosID>TrackingPose</SensorCosID>
+			</SensorCOS>
+			<!-- COS 2 Name -->
+			<SensorCOS>
+				<SensorCosID>InitialPose</SensorCosID>
+			</SensorCOS>
+		</Sensor>
+	</Sensors>
+	<Connections>
+		<!-- COS 1 contains the tracking pose -->
+		<COS>
+			<Name>TrackingPose</Name>
+			<SensorSource>
+				<SensorID>EdgeBasedInitializationSensorSource_0</SensorID>
+				<SensorCosID>TrackingPose</SensorCosID>
+			</SensorSource>
+		</COS>
+		<!-- COS 2 contains the initial pose -->
+		<COS>
+			<Name>InitialPose</Name>
+			<SensorSource>
+				<SensorID>EdgeBasedInitializationSensorSource_0</SensorID>
+				<SensorCosID>InitialPose</SensorCosID>
+			</SensorSource>
+		</COS>
+	</Connections>
+</TrackingData>

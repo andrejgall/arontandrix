@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="metaioSDKSignature">icFa9VTTBwCdXkGd81SbAh3e7392Mb8MfKnViatEhfQ=</string>
+    <string name="app_name">AROntHedgehog</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_startAR">Start AR</string>
+    <string name="button_readOnt">Read Ontology</string>
+    <string name="title_activity_display_message">Ontology</string>
+    <string name="hello_world">Main</string>
+    <string name="title_activity_tutorial_edge_based_initialization">TutorialEdgeBasedInitialization</string>
+    <string name="btnReset">Reset</string>
+    <string name="title_activity_main_activity1">MainActivity1</string>
+    <string name="title_activity_overlay_view">OverlayView</string>
+    <string name="button_u1">U1</string>
+    <string name="button_d1">D1</string>
+    <string name="button_u2">U2</string>
+    <string name="button_d2">D2</string>
+    <string name="button_l">L</string>
+    <string name="button_r">R</string>
+    <string name="button_OC">O/C</string>
+    <string name="conn">started</string>
+
+</resources>

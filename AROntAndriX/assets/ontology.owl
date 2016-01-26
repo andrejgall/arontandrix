@@ -1,0 +1,1289 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY cbc "http://www.tuwien.ac.at/Disbotics/cbc#" >
+    <!ENTITY core "http://www.tuwien.ac.at/Disbotics/core#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.owl-ontologies.com/Ontology1288802320.owl#"
+     xml:base="http://www.owl-ontologies.com/Ontology1288802320.owl"
+     xmlns:core="http://www.tuwien.ac.at/Disbotics/core#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:cbc="http://www.tuwien.ac.at/Disbotics/cbc#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/core#primarySuperclass -->
+
+    <owl:AnnotationProperty rdf:about="&core;primarySuperclass"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#analog_controller -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#analog_controller">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_analogs"/>
+        <rdfs:domain rdf:resource="&cbc;Analog"/>
+        <rdfs:range rdf:resource="&cbc;CBCController"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_channel -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_channel">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#channel_blobs"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&cbc;Channel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_channels -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_channels">
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#channel_camera"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&cbc;Channel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_controller -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_controller">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;CBCController"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_aButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_aButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_analogs -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_analogs">
+        <rdfs:range rdf:resource="&cbc;Analog"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_bButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_bButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_blackButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_blackButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_camera -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_camera">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_controller"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Camera"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_digitals -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_digitals">
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_downButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_downButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_leftButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_leftButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_motors -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_motors">
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Motor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_powerlevel -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_powerlevel">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;Analog"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_rightButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_rightButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_servos -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_servos">
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Servo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_upButton -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_upButton">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+        <rdfs:range rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_xAcceleration -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_xAcceleration">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;Analog"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_yAcceleration -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_yAcceleration">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;Analog"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_zAcceleration -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_zAcceleration">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;Analog"/>
+        <rdfs:domain rdf:resource="&cbc;CBCController"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#channel_blobs -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#channel_blobs">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;Blob"/>
+        <rdfs:domain rdf:resource="&cbc;Channel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#channel_camera -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#channel_camera">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="&cbc;Camera"/>
+        <rdfs:domain rdf:resource="&cbc;Channel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#digital_controller -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#digital_controller">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_digitals"/>
+        <rdfs:range rdf:resource="&cbc;CBCController"/>
+        <rdfs:domain rdf:resource="&cbc;Digital"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_controller -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_controller">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_motors"/>
+        <rdfs:range rdf:resource="&cbc;CBCController"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#next_point -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#next_point">
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#HedgehogController"/>
+        <rdfs:domain rdf:resource="&cbc;WithPort"/>
+        <rdfs:range rdf:resource="&cbc;WithPort"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_analog_grab_o -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_analog_grab_o">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;AnalogSensor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_flag -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_flag">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Flags"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_l -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_l">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;Motor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_r -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_r">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;Motor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;Servo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_l -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_l">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;Servo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_r -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_r">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;Servo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_heber -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_heber">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&cbc;Servo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#servo_controller -->
+
+    <owl:ObjectProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#servo_controller">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <owl:inverseOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#cbccontroller_servos"/>
+        <rdfs:range rdf:resource="&cbc;CBCController"/>
+        <rdfs:domain rdf:resource="&cbc;Servo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/core#primarySuperclass -->
+
+    <owl:ObjectProperty rdf:about="&core;primarySuperclass">
+        <rdfs:range rdf:resource="&owl;Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#actuator_position -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#actuator_position">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Actuator"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#analog_value -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#analog_value">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Analog"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#analogsensor_floating -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#analogsensor_floating">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;AnalogSensor"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#beginTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#beginTime">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Flags"/>
+        <rdfs:range rdf:resource="&xsd;long"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_angle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_angle">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxbottom -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxbottom">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxleft -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxleft">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxright -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxright">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxtop -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_bboxtop">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_confidence -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_confidence">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_height -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_height">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_majoraxis -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_majoraxis">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_minoraxis -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_minoraxis">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_size -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_size">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_width -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_width">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_x -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_x">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blob_y -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blob_y">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Blob"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#blocked -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#blocked">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Flags"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_autoexposure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_autoexposure">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_autowhitebalance -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_autowhitebalance">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_bluebalance -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_bluebalance">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_brightness -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_brightness">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_capturetime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_capturetime">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_contrast -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_contrast">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_exposure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_exposure">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_framenumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_framenumber">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_gamma -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_gamma">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_previouscapturetime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_previouscapturetime">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_redbalance -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_redbalance">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#camera_sharpness -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#camera_sharpness">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Camera"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#channel_nr -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#channel_nr">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Channel"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#dh -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#dh">
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#dh_a -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#dh_a">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#dh"/>
+        <rdfs:range rdf:resource="&xsd;double"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#dh_alpha -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#dh_alpha">
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#dh"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#dh_d -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#dh_d">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#dh"/>
+        <rdfs:range rdf:resource="&xsd;double"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#dh_phi -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#dh_phi">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#dh"/>
+        <rdfs:range rdf:resource="&xsd;double"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#digital_value -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#digital_value">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Digital"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#durchlauf -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#durchlauf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Flags"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#iterator -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#iterator">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Flags"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_dGain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_dGain">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_ddGain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_ddGain">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_iGain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_iGain">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_idGain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_idGain">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_pGain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_pGain">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#motor_pdGain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#motor_pdGain">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;Motor"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#pos3d -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#pos3d">
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#pos_x -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#pos_x">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#pos3d"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#pos_y -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#pos_y">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#pos3d"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#pos_z -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#pos_z">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#pos3d"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdfs:domain rdf:resource="&owl;Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_power -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_power">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_speed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_motor_speed">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher_links -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher_links">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher_mitte -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher_mitte">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher_rechts -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_dreher_rechts">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_l_closed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_l_closed">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_l_open -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_l_open">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_r_closed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_r_closed">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_r_open -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_grab_r_open">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_heber_oben -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_heber_oben">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_heber_unten -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#robot_servo_heber_unten">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#startpos -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#startpos">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#withport_port -->
+
+    <owl:DatatypeProperty rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#withport_port">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&cbc;WithPort"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController -->
+
+    <owl:Class rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Flags -->
+
+    <owl:Class rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Flags"/>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#HedgehogController -->
+
+    <owl:Class rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#HedgehogController"/>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Robot -->
+
+    <owl:Class rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Robot"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Actuator -->
+
+    <owl:Class rdf:about="&cbc;Actuator"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Analog -->
+
+    <owl:Class rdf:about="&cbc;Analog">
+        <rdfs:subClassOf rdf:resource="&cbc;Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#AnalogSensor -->
+
+    <owl:Class rdf:about="&cbc;AnalogSensor">
+        <rdfs:subClassOf rdf:resource="&cbc;Analog"/>
+        <rdfs:subClassOf rdf:resource="&cbc;WithPort"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Blob -->
+
+    <owl:Class rdf:about="&cbc;Blob"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#CBCController -->
+
+    <owl:Class rdf:about="&cbc;CBCController"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Camera -->
+
+    <owl:Class rdf:about="&cbc;Camera"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Channel -->
+
+    <owl:Class rdf:about="&cbc;Channel"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Digital -->
+
+    <owl:Class rdf:about="&cbc;Digital">
+        <rdfs:subClassOf rdf:resource="&cbc;Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#DigitalSensor -->
+
+    <owl:Class rdf:about="&cbc;DigitalSensor">
+        <rdfs:subClassOf rdf:resource="&cbc;Digital"/>
+        <rdfs:subClassOf rdf:resource="&cbc;WithPort"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Motor -->
+
+    <owl:Class rdf:about="&cbc;Motor">
+        <rdfs:subClassOf rdf:resource="&cbc;Actuator"/>
+        <rdfs:subClassOf rdf:resource="&cbc;WithPort"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Sensor -->
+
+    <owl:Class rdf:about="&cbc;Sensor"/>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#Servo -->
+
+    <owl:Class rdf:about="&cbc;Servo">
+        <rdfs:subClassOf rdf:resource="&cbc;Actuator"/>
+        <rdfs:subClassOf rdf:resource="&cbc;WithPort"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tuwien.ac.at/Disbotics/cbc#WithPort -->
+
+    <owl:Class rdf:about="&cbc;WithPort"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Class -->
+
+    <owl:Class rdf:about="&owl;Class"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <rdf:Description rdf:about="&owl;Thing">
+        <rdfs:comment rdf:datatype="&xsd;string"></rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#ASensor15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#ASensor15">
+        <rdf:type rdf:resource="&cbc;AnalogSensor"/>
+        <analog_value rdf:datatype="&xsd;int">0</analog_value>
+        <withport_port rdf:datatype="&xsd;int">15</withport_port>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Hedgehog0 -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Hedgehog0">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#HedgehogController"/>
+        <pos_y rdf:datatype="&xsd;int">0</pos_y>
+        <pos_x rdf:datatype="&xsd;int">0</pos_x>
+        <pos_z rdf:datatype="&xsd;int">0</pos_z>
+        <next_point rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo0"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Servo0 -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo0">
+        <rdf:type rdf:resource="&cbc;Servo"/>
+        <pos_z rdf:datatype="&xsd;int">-3</pos_z>
+        <withport_port rdf:datatype="&xsd;int">0</withport_port>
+        <startpos rdf:datatype="&xsd;int">125</startpos>
+        <pos_y rdf:datatype="&xsd;int">20</pos_y>
+        <pos_x rdf:datatype="&xsd;int">95</pos_x>
+        <servo_controller rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <next_point rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo1"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Servo1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo1">
+        <rdf:type rdf:resource="&cbc;Servo"/>
+        <pos_z rdf:datatype="&xsd;int">-3</pos_z>
+        <withport_port rdf:datatype="&xsd;int">1</withport_port>
+        <startpos rdf:datatype="&xsd;int">190</startpos>
+        <pos_y rdf:datatype="&xsd;int">60</pos_y>
+        <pos_x rdf:datatype="&xsd;int">95</pos_x>
+        <servo_controller rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <next_point rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Servo2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo2">
+        <rdf:type rdf:resource="&cbc;Servo"/>
+        <dh_d rdf:datatype="&xsd;double">0.0</dh_d>
+        <dh_a rdf:datatype="&xsd;double">100.0</dh_a>
+        <dh_alpha rdf:datatype="&xsd;double">180.0</dh_alpha>
+        <withport_port rdf:datatype="&xsd;int">2</withport_port>
+        <startpos rdf:datatype="&xsd;int">50</startpos>
+        <dh_phi rdf:datatype="&xsd;double">90.0</dh_phi>
+        <servo_controller rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+        <next_point rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo3"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/Ontology1288802320.owl#Servo3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/Ontology1288802320.owl#Servo3">
+        <rdf:type rdf:resource="&cbc;Servo"/>
+        <dh_alpha rdf:datatype="&xsd;double">0.0</dh_alpha>
+        <camera_exposure rdf:datatype="&xsd;double">0.0</camera_exposure>
+        <startpos rdf:datatype="&xsd;int">125</startpos>
+        <withport_port rdf:datatype="&xsd;int">3</withport_port>
+        <dh_a rdf:datatype="&xsd;double">70.0</dh_a>
+        <dh_phi rdf:datatype="&xsd;double">90.0</dh_phi>
+        <next_point rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#ASensor15"/>
+        <servo_controller rdf:resource="http://www.owl-ontologies.com/Ontology1288802320.owl#AndriXController"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+
