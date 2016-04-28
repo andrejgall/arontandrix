@@ -213,9 +213,9 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		list.add(new ObjValVec(upper));
 		list.add(new ObjValVec(grab));
 		list.add(new ObjValVec(a15));
-		list.add(new ObjValVec(new String("testv")));
-		list.add(new ObjValVec(new String("testvd")));
 		list.add(new ObjValVec(new String("target")));
+//		list.add(new ObjValVec(new String("testv")));
+//		list.add(new ObjValVec(new String("testvd")));
 
 		started = false;
 
@@ -241,8 +241,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			double x = ip.getY() - yToOr;
 			double y = ip.getZ() - zToOr;
 			double z = ip.getX() - xToOr;
-			double r = y;
-			double s = Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2));
+			double s = y;
+			double r = Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2));
 			double a1 = 135;
 			double a2 = 85;
 			double cost2 = (Math.pow(r, 2) + Math.pow(s, 2) - Math.pow(a1, 2) - Math.pow(a2, 2)) / (2 * a1 * a2);
@@ -253,14 +253,14 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 			double t0 = Math.toDegrees(-theta0);
 			double t1 = Math.toDegrees(theta1);
-			double t2 = Math.toDegrees(theta2);
+			double t2 = Math.toDegrees(theta2) - 90;
 
-			int t = angleFromServoTurn(turn.getPosition());
-			int l = 180 - angleFromServoLower(lower.getPosition());
-			int u = 180 - angleFromServoUpper(upper.getPosition());
+			int t = aFSTurn(turn.getPosition());
+			int l = aFSLower(lower.getPosition());
+			int u = aFSUpper(upper.getPosition());
 
-			System.err.println(t0 + "," + t1 + "," + t2);
-			System.err.println(t + "," + l + "," + u);
+			System.err.println("angles: t0:" + t0 + ",t1:" + t1 + ",t2:" + t2);
+			System.err.println("servos: t:" + t + ",l:" + l + ",u:" + u);
 
 			if (t < t0) {
 				turn.setPosition(turn.getPosition() + 1);
@@ -276,12 +276,61 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 			if (u < t2) {
 				upper.setPosition(upper.getPosition() + 1);
-			} else if (u > t2 && upper.getPosition() > 0) {
+			} else if (u > t2) {// && upper.getPosition() > 0
 				upper.setPosition(upper.getPosition() - 1);
 			}
 
 			Thread.sleep(100);
+
+			// servo positions
+			// turn:
+			// 0: 123
+			// -80: 0
+			// 85: 255
+			// lower:
+			// 0: 53
+			// 90: 193
+			// upper:
+			// 0: 196
+			// -90: 43
+			// 45: 255
 		}
+	}
+
+	/**
+	 * Calculates turn servo position in degrees.
+	 * 
+	 * @param pos
+	 *            Actual servo position.
+	 * @return Position in degrees.
+	 */
+	private int aFSTurn(int pos) {
+		double ang = (pos / 255.0 * 165.0 - 80.0);
+		return (int) Math.round(ang);
+	}
+
+	/**
+	 * Calculates lower arm servo position in degrees.
+	 * 
+	 * @param pos
+	 *            Actual servo position.
+	 * @return Position in degrees.
+	 */
+	private int aFSLower(int pos) {
+		double ang = (pos / 255.0 * 165.0 - 33.0);
+		return (int) Math.round(ang);
+	}
+
+	/**
+	 * Calculates upper arm servo position in degrees.
+	 * 
+	 * @param pos
+	 *            Actual servo position.
+	 * @return Position in degrees.
+	 */
+	private int aFSUpper(int pos) {
+		double ang = (pos / 255.0 * 165.0 - 122.0);
+		return (int) Math.round(ang);
 	}
 
 	/**
@@ -392,9 +441,9 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 					list.get(3).setVec(v3Tov2(xToOr + al.get(0), yToOr + al.get(1), zToOr + al.get(2)));
 					list.get(4).setVec(v3Tov2(xToOr + al.get(3), yToOr + al.get(4), zToOr + al.get(5)));
 					list.get(5).setVec(v3Tov2(xToOr + al.get(3) + 25, yToOr + al.get(4) + 10, zToOr + al.get(5) + 10));
-					list.get(6).setVec(v3Tov2(vt1.getX(), vt1.getY(), vt1.getZ()));
-					list.get(7).setVec(v3Tov2(vt2.getX(), vt2.getY(), vt2.getZ()));
-					list.get(8).setVec(v3Tov2(ip.getX(), ip.getY(), ip.getZ()));
+					list.get(6).setVec(v3Tov2(ip.getX(), ip.getY(), ip.getZ()));
+//					list.get(7).setVec(v3Tov2(vt1.getX(), vt1.getY(), vt1.getZ()));
+//					list.get(8).setVec(v3Tov2(vt2.getX(), vt2.getY(), vt2.getZ()));
 					overlay.updateMap(list);
 
 					System.out.println(ip.getX() + "," + ip.getY() + "," + ip.getZ());
@@ -432,6 +481,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 							helpline.setRotation(new Rotation(vtangle));
 							helpline.setTranslation(vtmid);
 						} else {
+							helpline.setScale(new Vector3d(1, 50, 1));
+							helpline.setTranslation(ip);
 							vt1 = new Vector3d(vt1t);
 							vt2 = new Vector3d(vt2t);
 						}
@@ -519,8 +570,6 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			helpline.setCoordinateSystemID(1);
 
 		helpline.setScale(new Vector3d(0, 0, 0));
-		// helpline.setRotation(new Rotation(1, 0, 0));
-		helpline.setTexture("TutorialEdgeBasedInitialization/Assets/Custom/tracking/texture.png");
 		helpline.setVisible(true);
 
 		loadTrackingConfig();
