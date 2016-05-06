@@ -147,6 +147,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	private Vector2d olddp = new Vector2d(0);
 	private Vector2d dp = new Vector2d(0);
 	private Vector3d ip = new Vector3d(0);
+	private Vector3d oldip = new Vector3d(0);
 
 	/**
 	 * Creating of the application.
@@ -214,8 +215,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		list.add(new ObjValVec(grab));
 		list.add(new ObjValVec(a15));
 		list.add(new ObjValVec(new String("target")));
-//		list.add(new ObjValVec(new String("testv")));
-//		list.add(new ObjValVec(new String("testvd")));
+		// list.add(new ObjValVec(new String("testv")));
+		// list.add(new ObjValVec(new String("testvd")));
 
 		started = false;
 
@@ -231,6 +232,9 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	}
 
 	private void moveTest() throws NotConnectedException, InterruptedException {
+
+		ArrayList<Integer> point = new ArrayList<Integer>();
+		ArrayList<Vector2d> path = new ArrayList<Vector2d>();
 
 		while (ip.equals(new Vector3d(0))) {
 			Thread.sleep(100);
@@ -280,8 +284,6 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 				upper.setPosition(upper.getPosition() - 1);
 			}
 
-			Thread.sleep(100);
-
 			// servo positions
 			// turn:
 			// 0: 123
@@ -294,6 +296,52 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			// 0: 196
 			// -90: 43
 			// 45: 255
+
+			if (!ip.equals(oldip)) {
+
+				int tt = (int) t;
+				int lt = (int) l;
+				int ut = (int) u;
+				path.clear();
+
+				while (tt != t0 && lt != t1 && ut != t2) {
+
+					if (tt != t0) {
+						if (t < t0) {
+							tt++;
+						} else if (t > t0) {
+							tt--;
+						}
+					}
+
+					if (lt != t1) {
+						if (l < t1) {
+							lt++;
+						} else if (l > t1) {
+							lt--;
+						}
+					}
+
+					if (ut != t2) {
+						if (u < t2) {
+							ut++;
+						} else if (u > t2) {
+							ut--;
+						}
+					}
+
+					point = fk.calculate(tt, lt, ut);
+					path.add(v3Tov2(xToOr + point.get(3), yToOr + point.get(4), zToOr + point.get(5)));
+				}
+
+				overlay.updatePointList(path);
+
+				oldip.setX(ip.getX());
+				oldip.setY(ip.getY());
+				oldip.setZ(ip.getZ());
+			}
+
+			Thread.sleep(100);
 		}
 	}
 
@@ -442,29 +490,13 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 					list.get(4).setVec(v3Tov2(xToOr + al.get(3), yToOr + al.get(4), zToOr + al.get(5)));
 					list.get(5).setVec(v3Tov2(xToOr + al.get(3) + 25, yToOr + al.get(4) + 10, zToOr + al.get(5) + 10));
 					list.get(6).setVec(v3Tov2(ip.getX(), ip.getY(), ip.getZ()));
-//					list.get(7).setVec(v3Tov2(vt1.getX(), vt1.getY(), vt1.getZ()));
-//					list.get(8).setVec(v3Tov2(vt2.getX(), vt2.getY(), vt2.getZ()));
+					// list.get(7).setVec(v3Tov2(vt1.getX(), vt1.getY(),
+					// vt1.getZ()));
+					// list.get(8).setVec(v3Tov2(vt2.getX(), vt2.getY(),
+					// vt2.getZ()));
 					overlay.updateMap(list);
 
 					System.out.println(ip.getX() + "," + ip.getY() + "," + ip.getZ());
-
-					ArrayList<Integer> point = new ArrayList<Integer>();
-					ArrayList<Vector2d> path = new ArrayList<Vector2d>();
-
-					for (int i = turnangle; i < 45; i++) {
-						point = fk.calculate(i, lowerangle, upperangle);
-						path.add(v3Tov2(xToOr + point.get(3), yToOr + point.get(4), zToOr + point.get(5)));
-					}
-
-					for (int i = lowerangle; i < 135; i++) {
-						point = fk.calculate(45, i, upperangle);
-						path.add(v3Tov2(xToOr + point.get(3), yToOr + point.get(4), zToOr + point.get(5)));
-					}
-
-					for (int i = upperangle; i < 120; i++) {
-						point = fk.calculate(45, 135, i);
-						path.add(v3Tov2(xToOr + point.get(3), yToOr + point.get(4), zToOr + point.get(5)));
-					}
 
 					dp = overlay.dp();
 
@@ -490,7 +522,6 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 						olddp.setY(dp.getY());
 					}
 
-					// overlay.updatePointList(path);
 					overlay.postInvalidate();
 					Thread.sleep(50);
 
