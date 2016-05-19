@@ -18,22 +18,22 @@ public final class R {
 		public static final int text_big_grey = 0x7f05000d;
 	}
 	public static final class id {
-		public static final int hwcinfo_analog = 0x7f07001f;
-		public static final int hwcinfo_analog_edit = 0x7f070020;
-		public static final int hwcinfo_analog_layout = 0x7f07001e;
-		public static final int hwcinfo_name = 0x7f07001a;
-		public static final int hwcinfo_name_edit = 0x7f07001b;
-		public static final int hwcinfo_newpassword = 0x7f070026;
-		public static final int hwcinfo_newpassword_repeat = 0x7f070027;
-		public static final int hwcinfo_oldpassword = 0x7f070025;
-		public static final int hwcinfo_pw = 0x7f07001c;
-		public static final int hwcinfo_pw_edit = 0x7f07001d;
-		public static final int hwcinfo_swcbaud = 0x7f070023;
-		public static final int hwcinfo_uart3baud = 0x7f070024;
-		public static final int hwcinfo_wifi = 0x7f070021;
-		public static final int hwcinfo_wifi_edit = 0x7f070022;
-		public static final int hwcinfo_wifiedit_layout = 0x7f070029;
-		public static final int hwcinfo_wifiedit_mode = 0x7f070028;
+		public static final int hwcinfo_analog = 0x7f070024;
+		public static final int hwcinfo_analog_edit = 0x7f070025;
+		public static final int hwcinfo_analog_layout = 0x7f070023;
+		public static final int hwcinfo_name = 0x7f07001f;
+		public static final int hwcinfo_name_edit = 0x7f070020;
+		public static final int hwcinfo_newpassword = 0x7f07002b;
+		public static final int hwcinfo_newpassword_repeat = 0x7f07002c;
+		public static final int hwcinfo_oldpassword = 0x7f07002a;
+		public static final int hwcinfo_pw = 0x7f070021;
+		public static final int hwcinfo_pw_edit = 0x7f070022;
+		public static final int hwcinfo_swcbaud = 0x7f070028;
+		public static final int hwcinfo_uart3baud = 0x7f070029;
+		public static final int hwcinfo_wifi = 0x7f070026;
+		public static final int hwcinfo_wifi_edit = 0x7f070027;
+		public static final int hwcinfo_wifiedit_layout = 0x7f07002e;
+		public static final int hwcinfo_wifiedit_mode = 0x7f07002d;
 	}
 	public static final class layout {
 		public static final int hwcinfo = 0x7f030005;

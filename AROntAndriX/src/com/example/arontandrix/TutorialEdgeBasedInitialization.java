@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.LinearLayout;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -148,6 +149,11 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	private Vector2d dp = new Vector2d(0);
 	private Vector3d ip = new Vector3d(0);
 	private Vector3d oldip = new Vector3d(0);
+	private int mode = 0;
+	private LinearLayout l0;
+	private LinearLayout l1;
+	private LinearLayout l2;
+	private LinearLayout l3;
 
 	/**
 	 * Creating of the application.
@@ -176,10 +182,17 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 		overlay = (OverlayView) mGUIView.findViewById(R.id.OverlayView);
 		// ImageView iv = (ImageView) mGUIView.findViewById(R.id.test_image);
-		overlay.visible = true;
+		// overlay.visible = true;
 		// overlay.moveAlongPath(iv);
 
 		// ontology = new OntAccess(this.getApplicationContext());
+
+		l0 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar0);
+		l1 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar1);
+		l2 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar2);
+		l3 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar3);
+		l2.setVisibility(4);
+		l3.setVisibility(4);
 
 		try {
 			a15 = new Analog(15);
@@ -223,15 +236,15 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		rv = new ReadValues(list);
 
 		v = new Thread(rv);
-		v.start();
+		// v.start();
 
 		t = new Thread(this);
-		t.start();
+		// t.start();
 
 		t1 = new Thread(this);
 	}
 
-	private void moveTest() throws NotConnectedException, InterruptedException {
+	private void movementLine() throws NotConnectedException, InterruptedException {
 
 		ArrayList<Integer> point = new ArrayList<Integer>();
 		ArrayList<Vector2d> path = new ArrayList<Vector2d>();
@@ -240,7 +253,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			Thread.sleep(100);
 		}
 
-		while (!done) {
+		while (!done && mode == 1) {
 
 			double x = ip.getY() - yToOr;
 			double y = ip.getZ() - zToOr;
@@ -266,22 +279,24 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			System.err.println("angles: t0:" + t0 + ",t1:" + t1 + ",t2:" + t2);
 			System.err.println("servos: t:" + t + ",l:" + l + ",u:" + u);
 
-			if (t < t0) {
-				turn.setPosition(turn.getPosition() + 1);
-			} else if (t > t0) {
-				turn.setPosition(turn.getPosition() - 1);
-			}
+			if (mode == 1) {
+				if (t < t0) {
+					turn.setPosition(turn.getPosition() + 1);
+				} else if (t > t0) {
+					turn.setPosition(turn.getPosition() - 1);
+				}
 
-			if (l < t1) {
-				lower.setPosition(lower.getPosition() + 1);
-			} else if (l > t1) {
-				lower.setPosition(lower.getPosition() - 1);
-			}
+				if (l < t1) {
+					lower.setPosition(lower.getPosition() + 1);
+				} else if (l > t1) {
+					lower.setPosition(lower.getPosition() - 1);
+				}
 
-			if (u < t2) {
-				upper.setPosition(upper.getPosition() + 1);
-			} else if (u > t2) {// && upper.getPosition() > 0
-				upper.setPosition(upper.getPosition() - 1);
+				if (u < t2) {
+					upper.setPosition(upper.getPosition() + 1);
+				} else if (u > t2) {// && upper.getPosition() > 0
+					upper.setPosition(upper.getPosition() - 1);
+				}
 			}
 
 			// servo positions
@@ -343,6 +358,9 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 			Thread.sleep(100);
 		}
+
+		path.clear();
+		overlay.updatePointList(path);
 	}
 
 	/**
@@ -457,7 +475,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	public void run() {
 		if (started) {
 			try {
-				moveTest();
+				movementLine();
 			} catch (NotConnectedException | InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -529,6 +547,32 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+
+	/**
+	 * Closing button.
+	 * 
+	 * @param v
+	 */
+	public void onModeButtonClick(View v) {
+		mode = (mode + 1) % 3;
+
+		switch (mode) {
+		case 0:
+			l0.setVisibility(0);
+			l1.setVisibility(0);
+			l2.setVisibility(4);
+			l3.setVisibility(4);
+			break;
+		case 1:
+			l0.setVisibility(4);
+			l1.setVisibility(4);
+			break;
+		case 2:
+			l2.setVisibility(0);
+			l3.setVisibility(0);
+			break;
 		}
 	}
 

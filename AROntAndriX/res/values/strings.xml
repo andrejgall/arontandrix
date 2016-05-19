@@ -20,5 +20,6 @@
     <string name="button_r">R</string>
     <string name="button_OC">O/C</string>
     <string name="conn">started</string>
+    <string name="btnMode">Mode</string>
 
 </resources>
