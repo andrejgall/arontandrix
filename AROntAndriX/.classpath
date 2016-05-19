@@ -4,13 +4,11 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="C:/Users/Andrej/Documents/workspace/AROntAndriX/libs/androjena_0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andrej/Documents/workspace/AROntAndriX/libs/icu4j-3.4.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andrej/Documents/workspace/AROntAndriX/libs/iri-0.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andrej/Documents/workspace/AROntAndriX/libs/slf4j-android-1.6.1-RC1.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/HedgehogCore"/>
-	<classpathentry kind="lib" path="C:/Users/Andrej/Documents/Jama-1.0.3.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/metaioSDK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="lib" path="libs/androjena_0.5.jar"/>
+	<classpathentry kind="lib" path="libs/Jama-1.0.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
