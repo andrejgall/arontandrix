@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.andrix.low.NotConnectedException;
+import org.andrix.low.RequestTimeoutException;
 import org.andrix.misc.InvalidPortException;
+import org.andrix.motors.Motor;
 import org.andrix.motors.Servo;
 import org.andrix.sensors.Analog;
 
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -141,19 +144,86 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	 */
 	private List<ObjValVec> list;
 
+	/**
+	 * True if the main thread was already started once.
+	 */
 	private boolean started;
+
+	/**
+	 * Second thread. Used for showing of the route taken and touch control
+	 * response.
+	 */
 	private Thread t1;
+
+	/**
+	 * Touch vector start.
+	 */
 	private Vector3d vt1 = new Vector3d(0);
+
+	/**
+	 * Touch vector end.
+	 */
 	private Vector3d vt2 = new Vector3d(0);
-	private Vector2d olddp = new Vector2d(0);
+
+	/**
+	 * Point on the screen where it was touched.
+	 */
 	private Vector2d dp = new Vector2d(0);
+
+	/**
+	 * Previous point on the screen where it was touched.
+	 */
+	private Vector2d olddp = new Vector2d(0);
+
+	/**
+	 * Intersection point of the two touch vectors.
+	 */
 	private Vector3d ip = new Vector3d(0);
+
+	/**
+	 * Previous intersection point of the two touch vectors.
+	 */
 	private Vector3d oldip = new Vector3d(0);
+
+	/**
+	 * Control mode. Buttons for each component, touch or single component.
+	 */
 	private int mode = 0;
+
+	/**
+	 * Contains left buttons for all components.
+	 */
 	private LinearLayout l0;
+
+	/**
+	 * Contains right buttons for all components.
+	 */
 	private LinearLayout l1;
+
+	/**
+	 * Contains minus button for one component.
+	 */
 	private LinearLayout l2;
+
+	/**
+	 * Contains plus button for one component.
+	 */
 	private LinearLayout l3;
+
+	/**
+	 * Currently selected actuator.
+	 */
+	private Object selected;
+
+	/**
+	 * Currently selected mode.
+	 */
+	private TextView modeText;
+
+	/**
+	 * Values of currently selected actuator.
+	 */
+	private TextView infoText;
 
 	/**
 	 * Creating of the application.
@@ -193,6 +263,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		l3 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar3);
 		l2.setVisibility(4);
 		l3.setVisibility(4);
+		modeText = (TextView) mGUIView.findViewById(R.id.modeText);
+		infoText = (TextView) mGUIView.findViewById(R.id.infoText);
 
 		try {
 			a15 = new Analog(15);
@@ -406,7 +478,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	protected void onGeometryTouched(IGeometry geometry) {
 	}
 
-	private boolean intersection(Vector3d a1, Vector3d a2, Vector3d b1, Vector3d b2, int tol) {
+	private float intersection(Vector3d a1, Vector3d a2, Vector3d b1, Vector3d b2) {
 
 		// nA = dot(cross(B2-B1,A1-B1),cross(A2-A1,B2-B1));
 		// nB = dot(cross(A2-A1,A1-B1),cross(A2-A1,B2-B1));
@@ -420,13 +492,32 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		Vector3d a0 = a1.add(a2.subtract(a1).multiply(nA / d));
 		Vector3d b0 = b1.add(b2.subtract(b1).multiply(nB / d));
 
-		if (Math.abs(a0.getX() - b0.getX()) < tol || Math.abs(a0.getY() - b0.getY()) < tol
-				|| Math.abs(a0.getZ() - b0.getZ()) < tol) {
-			ip = a0;
-			return true;
-		}
+		ip = a0;
 
-		return false;
+		return (Math.abs(a0.getX() - b0.getX()) + Math.abs(a0.getY() - b0.getY()) + Math.abs(a0.getZ() - b0.getZ())) / 3;
+	}
+
+	private int getClosest() {
+		Vector3d vt1t = new Vector3d(0);
+		Vector3d vt2t = new Vector3d(0);
+		ArrayList<Float> dist = new ArrayList<>();
+		int closest = 0;
+		float mindist = 0;
+		for (ObjValVec ovv : list) {
+			vt1t = ovv.getVec3();
+			vt2t = ovv.getVec3();
+			vt1 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(-100));
+			vt2 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(300));
+			dist.add(intersection(vt1t, vt2t, vt1, vt2));
+		}
+		mindist = dist.get(0);
+		for (int i = 1; i < dist.size(); i++) {
+			if (dist.get(i) < mindist) {
+				mindist = dist.get(i);
+				closest = i;
+			}
+		}
+		return closest;
 	}
 
 	// distance = sqrt[(z2 - z1)^2 + (x2 - x1)^2 + (y2 - y1)^2]
@@ -502,17 +593,22 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 					al = fk.calculate(turnangle, lowerangle, upperangle);
 
-					list.get(0).setVec(v3Tov2(0, 0, 0));
-					list.get(1).setVec(v3Tov2(xToOr, yToOr, zToOr - 40));
-					list.get(2).setVec(v3Tov2(xToOr, yToOr, zToOr));
-					list.get(3).setVec(v3Tov2(xToOr + al.get(0), yToOr + al.get(1), zToOr + al.get(2)));
-					list.get(4).setVec(v3Tov2(xToOr + al.get(3), yToOr + al.get(4), zToOr + al.get(5)));
-					list.get(5).setVec(v3Tov2(xToOr + al.get(3) + 25, yToOr + al.get(4) + 10, zToOr + al.get(5) + 10));
-					list.get(6).setVec(v3Tov2(ip.getX(), ip.getY(), ip.getZ()));
-					// list.get(7).setVec(v3Tov2(vt1.getX(), vt1.getY(),
-					// vt1.getZ()));
-					// list.get(8).setVec(v3Tov2(vt2.getX(), vt2.getY(),
-					// vt2.getZ()));
+					list.get(0).setVec3(new Vector3d(0, 0, 0));
+					list.get(1).setVec3(new Vector3d(xToOr, yToOr, zToOr - 40));
+					list.get(2).setVec3(new Vector3d(xToOr, yToOr, zToOr));
+					list.get(3).setVec3(new Vector3d(xToOr + al.get(0), yToOr + al.get(1), zToOr + al.get(2)));
+					list.get(4).setVec3(new Vector3d(xToOr + al.get(3), yToOr + al.get(4), zToOr + al.get(5)));
+					list.get(5).setVec3(new Vector3d(xToOr + al.get(3) + 25, yToOr + al.get(4) + 10, zToOr + al.get(5) + 10));
+					list.get(6).setVec3(new Vector3d(ip.getX(), ip.getY(), ip.getZ()));
+
+					list.get(0).setVec2(v3Tov2(list.get(0).getVec3()));
+					list.get(1).setVec2(v3Tov2(list.get(1).getVec3()));
+					list.get(2).setVec2(v3Tov2(list.get(2).getVec3()));
+					list.get(3).setVec2(v3Tov2(list.get(3).getVec3()));
+					list.get(4).setVec2(v3Tov2(list.get(4).getVec3()));
+					list.get(5).setVec2(v3Tov2(list.get(5).getVec3()));
+					list.get(6).setVec2(v3Tov2(list.get(6).getVec3()));
+
 					overlay.updateMap(list);
 
 					System.out.println(ip.getX() + "," + ip.getY() + "," + ip.getZ());
@@ -520,26 +616,31 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 					dp = overlay.dp();
 
 					if (!dp.equals(olddp) && mRendererInitialized) {
-						Vector3d vt1t = new Vector3d(vt1);
-						Vector3d vt2t = new Vector3d(vt2);
-						vt1 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(-100));
-						vt2 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(300));
-						if (!intersection(vt1t, vt2t, vt1, vt2, 5)) {
-							float vtdist = (float) Math.sqrt(Math.pow(vt2.getX() - vt1.getX(), 2)
-									+ Math.pow(vt2.getY() - vt1.getY(), 2) + Math.pow(vt2.getZ() - vt1.getZ(), 2));
-							Vector3d vtmid = new Vector3d(vt1.add(vt2).divide(2));
-							float[] vtangle = angleV(new Vector3d(0, 1, 0), vt2.subtract(vt1).normalize());
-							helpline.setScale(new Vector3d(1, vtdist * 50, 1));
-							helpline.setRotation(new Rotation(vtangle));
-							helpline.setTranslation(vtmid);
-						} else {
-							helpline.setScale(new Vector3d(1, 50, 1));
-							helpline.setTranslation(ip);
-							vt1 = new Vector3d(vt1t);
-							vt2 = new Vector3d(vt2t);
+
+						if (mode == 1) {
+							Vector3d vt1t = new Vector3d(vt1);
+							Vector3d vt2t = new Vector3d(vt2);
+							vt1 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(-100));
+							vt2 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(300));
+							if (intersection(vt1t, vt2t, vt1, vt2) < 5) {
+								float vtdist = (float) Math.sqrt(Math.pow(vt2.getX() - vt1.getX(), 2)
+										+ Math.pow(vt2.getY() - vt1.getY(), 2) + Math.pow(vt2.getZ() - vt1.getZ(), 2));
+								Vector3d vtmid = new Vector3d(vt1.add(vt2).divide(2));
+								float[] vtangle = angleV(new Vector3d(0, 1, 0), vt2.subtract(vt1).normalize());
+								helpline.setScale(new Vector3d(1, vtdist * 50, 1));
+								helpline.setRotation(new Rotation(vtangle));
+								helpline.setTranslation(vtmid);
+							} else {
+								helpline.setScale(new Vector3d(1, 50, 1));
+								helpline.setTranslation(ip);
+								vt1 = new Vector3d(vt1t);
+								vt2 = new Vector3d(vt2t);
+							}
+							olddp.setX(dp.getX());
+							olddp.setY(dp.getY());
 						}
-						olddp.setX(dp.getX());
-						olddp.setY(dp.getY());
+					} else if (mode == 2) {
+						selected = list.get(getClosest()).getObj();
 					}
 
 					overlay.postInvalidate();
@@ -566,14 +667,18 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			l1.setVisibility(0);
 			l2.setVisibility(4);
 			l3.setVisibility(4);
+			modeText.setText("Manual control");
+			infoText.setText("");
 			break;
 		case 1:
 			l0.setVisibility(4);
 			l1.setVisibility(4);
+			modeText.setText("Touch control");
 			break;
 		case 2:
 			l2.setVisibility(0);
 			l3.setVisibility(0);
+			modeText.setText("Single actuator control");
 			break;
 		}
 	}
@@ -760,6 +865,10 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		return metaioSDK.getViewportCoordinatesFrom3DPosition(1, v);
 	}
 
+	private Vector2d v3Tov2(Vector3d v) {
+		return metaioSDK.getViewportCoordinatesFrom3DPosition(1, v);
+	}
+
 	/**
 	 * Calculates turn servo position in degrees.
 	 * 
@@ -794,6 +903,50 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	private int angleFromServoUpper(int pos) {
 		double ang = 90.0 - (pos - 50.0) / 150.0 * 90.0;
 		return (int) Math.round(ang);
+	}
+
+	public void onPlusButtonClick(View v) {
+		if (selected instanceof Servo) {
+			Servo s = (Servo) selected;
+			if (s.getPosition() < 255) {
+				try {
+					s.setPosition(s.getPosition() + 10);
+					infoText.setText("Servo" + s.getPort() + ": " + s.getPosition());
+				} catch (NotConnectedException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (selected instanceof Motor) {
+			Motor m = (Motor) selected;
+			try {
+				m.moveAtVelocity(m.getVelocity() + 100);
+				infoText.setText("Motor" + m.getPort() + ": " + m.getVelocity());
+			} catch (NotConnectedException | RequestTimeoutException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void onMinusButtonClick(View v) {
+		if (selected instanceof Servo) {
+			Servo s = (Servo) selected;
+			if (s.getPosition() > 0) {
+				try {
+					s.setPosition(s.getPosition() - 10);
+					infoText.setText("Servo" + s.getPort() + ": " + s.getPosition());
+				} catch (NotConnectedException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (selected instanceof Motor) {
+			Motor m = (Motor) selected;
+			try {
+				m.moveAtVelocity(m.getVelocity() - 100);
+				infoText.setText("Motor" + m.getPort() + ": " + m.getVelocity());
+			} catch (NotConnectedException | RequestTimeoutException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

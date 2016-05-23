@@ -136,7 +136,7 @@ public class OverlayView extends View {
 			ArrayList<Vector2d> verts = new ArrayList<Vector2d>();
 			Object o;
 			for (ObjValVec ovv : list) {
-				Vector2d v = ovv.getVec();
+				Vector2d v = ovv.getVec2();
 				textx = (int) v.getX();
 				texty = (int) v.getY();
 

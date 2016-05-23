@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:background="@android:color/transparent"
         android:contentDescription="@+strings/btnClose"
         android:onClick="onButtonClick"
@@ -33,10 +32,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
         android:longClickable="true"
         android:onClick="onModeButtonClick"
         android:text="@string/btnMode" />
+
+    <LinearLayout
+        android:id="@+id/textViews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/modeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modeText" />
+
+        <TextView
+            android:id="@+id/infoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/infoText" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/buttonBar0"
@@ -44,7 +62,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
         android:orientation="vertical" >
 
@@ -94,7 +111,6 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
         android:orientation="vertical" >
@@ -146,18 +162,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
         android:orientation="vertical" >
 
         <Button
             android:id="@+id/plusButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:longClickable="true"
-            android:onClick="onResetButtonClick"
+            android:onClick="onPlusButtonClick"
             android:text="+" />
     </LinearLayout>
 
@@ -166,7 +181,6 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
         android:orientation="vertical" >
@@ -174,11 +188,11 @@
         <Button
             android:id="@+id/MminusButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:longClickable="true"
-            android:onClick="onOCButtonClick"
+            android:onClick="onMinusButtonClick"
             android:text="-" />
     </LinearLayout>
 
