@@ -253,7 +253,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			Thread.sleep(100);
 		}
 
-		while (!done && mode == 1) {
+		while (!done) {
 
 			double x = ip.getY() - yToOr;
 			double y = ip.getZ() - zToOr;
@@ -406,7 +406,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	protected void onGeometryTouched(IGeometry geometry) {
 	}
 
-	private boolean intersection(Vector3d a1, Vector3d a2, Vector3d b1, Vector3d b2) {
+	private boolean intersection(Vector3d a1, Vector3d a2, Vector3d b1, Vector3d b2, int tol) {
 
 		// nA = dot(cross(B2-B1,A1-B1),cross(A2-A1,B2-B1));
 		// nB = dot(cross(A2-A1,A1-B1),cross(A2-A1,B2-B1));
@@ -420,7 +420,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		Vector3d a0 = a1.add(a2.subtract(a1).multiply(nA / d));
 		Vector3d b0 = b1.add(b2.subtract(b1).multiply(nB / d));
 
-		if (Math.abs(a0.getX() - b0.getX()) < 5 || Math.abs(a0.getY() - b0.getY()) < 5 || Math.abs(a0.getZ() - b0.getZ()) < 5) {
+		if (Math.abs(a0.getX() - b0.getX()) < tol || Math.abs(a0.getY() - b0.getY()) < tol
+				|| Math.abs(a0.getZ() - b0.getZ()) < tol) {
 			ip = a0;
 			return true;
 		}
@@ -523,8 +524,9 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 						Vector3d vt2t = new Vector3d(vt2);
 						vt1 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(-100));
 						vt2 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(300));
-						if (!intersection(vt1t, vt2t, vt1, vt2)) {
-							float vtdist = (float) Math.sqrt(Math.pow(vt2.getX() - vt1.getX(), 2) + Math.pow(vt2.getY() - vt1.getY(), 2) + Math.pow(vt2.getZ() - vt1.getZ(), 2));
+						if (!intersection(vt1t, vt2t, vt1, vt2, 5)) {
+							float vtdist = (float) Math.sqrt(Math.pow(vt2.getX() - vt1.getX(), 2)
+									+ Math.pow(vt2.getY() - vt1.getY(), 2) + Math.pow(vt2.getZ() - vt1.getZ(), 2));
 							Vector3d vtmid = new Vector3d(vt1.add(vt2).divide(2));
 							float[] vtangle = angleV(new Vector3d(0, 1, 0), vt2.subtract(vt1).normalize());
 							helpline.setScale(new Vector3d(1, vtdist * 50, 1));
@@ -632,7 +634,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		mVizAidModel = loadModel("TutorialEdgeBasedInitialization/Assets/Custom/tracking/TubeModel.obj");
 		helpline = loadModel("TutorialEdgeBasedInitialization/Assets/Custom/tracking/helpline.obj");
 
-		String envmapPath = AssetsManager.getAssetPath(getApplicationContext(), "TutorialEdgeBasedInitialization/Assets/Custom/env_map.zip");
+		String envmapPath = AssetsManager.getAssetPath(getApplicationContext(),
+				"TutorialEdgeBasedInitialization/Assets/Custom/env_map.zip");
 		metaioSDK.loadEnvironmentMap(envmapPath);
 
 		if (mModel != null)
@@ -654,7 +657,8 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	 * Loads the tracking configuration.
 	 */
 	void loadTrackingConfig() {
-		boolean result = setTrackingConfiguration("TutorialEdgeBasedInitialization/Assets/Custom/tracking/Tracking.xml");
+		boolean result = setTrackingConfiguration(
+				"TutorialEdgeBasedInitialization/Assets/Custom/tracking/Tracking.xml");
 
 		if (!result)
 			MetaioDebug.log(Log.ERROR, "Failed to load tracking configuration.");
