@@ -19,6 +19,9 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntProperty;
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
 import com.metaio.sdk.jni.ETRACKING_STATE;
@@ -87,7 +90,10 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	 */
 	private OverlayView overlay;
 
-	// private OntAccess ontology;
+	/**
+	 * Ontology access.
+	 */
+	private OntAccess ontology;
 
 	/**
 	 * Calculating of the forward kinematics.
@@ -255,7 +261,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		// overlay.visible = true;
 		// overlay.moveAlongPath(iv);
 
-		// ontology = new OntAccess(this.getApplicationContext());
+		ontology = new OntAccess(this.getApplicationContext());
 
 		l0 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar0);
 		l1 = (LinearLayout) mGUIView.findViewById(R.id.buttonBar1);
@@ -314,6 +320,16 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		// t.start();
 
 		t1 = new Thread(this);
+
+		ontTest();
+	}
+
+	private void ontTest() {
+		OntModel om = ontology.om;
+		String NS = ontology.NS;
+		Individual ind = om.getIndividual(NS + "Hedgehog0");
+		OntProperty op = om.getOntProperty(NS + "next_point");
+		System.err.println(ind.getLocalName() + "\n Next: " + ind.getProperty(op));
 	}
 
 	private void movementLine() throws NotConnectedException, InterruptedException {
