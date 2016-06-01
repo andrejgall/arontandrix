@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements StateListener {
 		mTask.execute(0);
 		StateListener._l_state.add(this);
 		Controller.initialize(this);
-		//dialog = ProgressDialog.show(this, "Connecting", "Please wait...", true);
+		dialog = ProgressDialog.show(this, "Connecting", "Please wait...", true);
 	}
 
 	@Override

@@ -169,7 +169,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	/**
 	 * Touch vector end.
 	 */
-	private Vector3d vt2 = new Vector3d(0);
+	private Vector3d vt2 = new Vector3d(1);
 
 	/**
 	 * Point on the screen where it was touched.
@@ -314,21 +314,26 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		rv = new ReadValues(list);
 
 		v = new Thread(rv);
-		// v.start();
+		v.start();
 
 		t = new Thread(this);
-		// t.start();
+		t.start();
 
 		t1 = new Thread(this);
 
-		ontTest();
+		// ontTest();
 	}
 
 	private void ontTest() {
+		System.err.println("1");
 		OntModel om = ontology.om;
+		System.err.println("2");
 		String NS = ontology.NS;
+		System.err.println("3");
 		Individual ind = om.getIndividual(NS + "Hedgehog0");
+		System.err.println("4");
 		OntProperty op = om.getOntProperty(NS + "next_point");
+		System.err.println("5");
 		System.err.println(ind.getLocalName() + "\n Next: " + ind.getProperty(op));
 	}
 
@@ -364,8 +369,9 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			int l = aFSLower(lower.getPosition());
 			int u = aFSUpper(upper.getPosition());
 
-			System.err.println("angles: t0:" + t0 + ",t1:" + t1 + ",t2:" + t2);
-			System.err.println("servos: t:" + t + ",l:" + l + ",u:" + u);
+			// System.err.println("angles: t0:" + t0 + ",t1:" + t1 + ",t2:" +
+			// t2);
+			// System.err.println("servos: t:" + t + ",l:" + l + ",u:" + u);
 
 			if (mode == 1) {
 				if (t < t0) {
@@ -400,55 +406,56 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 			// -90: 43
 			// 45: 255
 
-			if (!ip.equals(oldip)) {
-
-				int tt = (int) t;
-				int lt = (int) l;
-				int ut = (int) u;
-				path.clear();
-
-				while (tt != t0 && lt != t1 && ut != t2) {
-
-					if (tt != t0) {
-						if (t < t0) {
-							tt++;
-						} else if (t > t0) {
-							tt--;
-						}
-					}
-
-					if (lt != t1) {
-						if (l < t1) {
-							lt++;
-						} else if (l > t1) {
-							lt--;
-						}
-					}
-
-					if (ut != t2) {
-						if (u < t2) {
-							ut++;
-						} else if (u > t2) {
-							ut--;
-						}
-					}
-
-					point = fk.calculate(tt, lt, ut);
-					path.add(v3Tov2(xToOr + point.get(3), yToOr + point.get(4), zToOr + point.get(5)));
-				}
-
-				overlay.updatePointList(path);
-
-				oldip.setX(ip.getX());
-				oldip.setY(ip.getY());
-				oldip.setZ(ip.getZ());
-			}
+			// if (!ip.equals(oldip)) {
+			//
+			// int tt = (int) t;
+			// int lt = (int) l;
+			// int ut = (int) u;
+			// path.clear();
+			//
+			// while (tt != t0 && lt != t1 && ut != t2) {
+			//
+			// if (tt != t0) {
+			// if (t < t0) {
+			// tt++;
+			// } else if (t > t0) {
+			// tt--;
+			// }
+			// }
+			//
+			// if (lt != t1) {
+			// if (l < t1) {
+			// lt++;
+			// } else if (l > t1) {
+			// lt--;
+			// }
+			// }
+			//
+			// if (ut != t2) {
+			// if (u < t2) {
+			// ut++;
+			// } else if (u > t2) {
+			// ut--;
+			// }
+			// }
+			//
+			// point = fk.calculate(tt, lt, ut);
+			// path.add(v3Tov2(xToOr + point.get(3), yToOr + point.get(4), zToOr
+			// + point.get(5)));
+			// }
+			//
+			// overlay.updatePointList(path);
+			//
+			// oldip.setX(ip.getX());
+			// oldip.setY(ip.getY());
+			// oldip.setZ(ip.getZ());
+			// }
 
 			Thread.sleep(100);
 		}
 
-		path.clear();
-		overlay.updatePointList(path);
+		// path.clear();
+		// overlay.updatePointList(path);
 	}
 
 	/**
@@ -510,7 +517,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 		ip = a0;
 
-		return (Math.abs(a0.getX() - b0.getX()) + Math.abs(a0.getY() - b0.getY()) + Math.abs(a0.getZ() - b0.getZ())) / 3;
+		return ((Math.abs(a0.getX() - b0.getX()) + Math.abs(a0.getY() - b0.getY()) + Math.abs(a0.getZ() - b0.getZ())) / 3);
 	}
 
 	private int getClosest() {
@@ -633,30 +640,28 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 
 					if (!dp.equals(olddp) && mRendererInitialized) {
 
-						if (mode == 1) {
-							Vector3d vt1t = new Vector3d(vt1);
-							Vector3d vt2t = new Vector3d(vt2);
-							vt1 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(-100));
-							vt2 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(300));
-							if (intersection(vt1t, vt2t, vt1, vt2) < 5) {
-								float vtdist = (float) Math.sqrt(Math.pow(vt2.getX() - vt1.getX(), 2)
-										+ Math.pow(vt2.getY() - vt1.getY(), 2) + Math.pow(vt2.getZ() - vt1.getZ(), 2));
-								Vector3d vtmid = new Vector3d(vt1.add(vt2).divide(2));
-								float[] vtangle = angleV(new Vector3d(0, 1, 0), vt2.subtract(vt1).normalize());
-								helpline.setScale(new Vector3d(1, vtdist * 50, 1));
-								helpline.setRotation(new Rotation(vtangle));
-								helpline.setTranslation(vtmid);
-							} else {
-								helpline.setScale(new Vector3d(1, 50, 1));
-								helpline.setTranslation(ip);
-								vt1 = new Vector3d(vt1t);
-								vt2 = new Vector3d(vt2t);
-							}
-							olddp.setX(dp.getX());
-							olddp.setY(dp.getY());
+						Vector3d vt1t = new Vector3d(vt1);
+						Vector3d vt2t = new Vector3d(vt2);
+						vt1 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(-100));
+						vt2 = metaioSDK.get3DPositionFromViewportCoordinates(1, dp, new Vector3d(300));
+						System.err.println(vt1t.getX() + " " + vt2t.getX() + " " + vt1.getX() + " " + vt2.getX());
+						if (intersection(vt1t, vt2t, vt1, vt2) < 5 && mode == 1) {
+							float vtdist = (float) Math.sqrt(Math.pow(vt2.getX() - vt1.getX(), 2) + Math.pow(vt2.getY() - vt1.getY(), 2) + Math.pow(vt2.getZ() - vt1.getZ(), 2));
+							Vector3d vtmid = new Vector3d(vt1.add(vt2).divide(2));
+							float[] vtangle = angleV(new Vector3d(0, 1, 0), vt2.subtract(vt1).normalize());
+							helpline.setScale(new Vector3d(1, vtdist * 50, 1));
+							helpline.setRotation(new Rotation(vtangle));
+							helpline.setTranslation(vtmid);
+						} else if (mode == 2) {
+							selected = list.get(getClosest()).getObj();
+						} else if (mode == 1 || mode == 2) {
+							helpline.setScale(new Vector3d(1, 50, 1));
+							helpline.setTranslation(ip);
+							vt1 = new Vector3d(vt1t);
+							vt2 = new Vector3d(vt2t);
 						}
-					} else if (mode == 2) {
-						selected = list.get(getClosest()).getObj();
+						olddp.setX(dp.getX());
+						olddp.setY(dp.getY());
 					}
 
 					overlay.postInvalidate();
@@ -755,8 +760,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 		mVizAidModel = loadModel("TutorialEdgeBasedInitialization/Assets/Custom/tracking/TubeModel.obj");
 		helpline = loadModel("TutorialEdgeBasedInitialization/Assets/Custom/tracking/helpline.obj");
 
-		String envmapPath = AssetsManager.getAssetPath(getApplicationContext(),
-				"TutorialEdgeBasedInitialization/Assets/Custom/env_map.zip");
+		String envmapPath = AssetsManager.getAssetPath(getApplicationContext(), "TutorialEdgeBasedInitialization/Assets/Custom/env_map.zip");
 		metaioSDK.loadEnvironmentMap(envmapPath);
 
 		if (mModel != null)
@@ -778,8 +782,7 @@ public class TutorialEdgeBasedInitialization extends ARViewActivity implements R
 	 * Loads the tracking configuration.
 	 */
 	void loadTrackingConfig() {
-		boolean result = setTrackingConfiguration(
-				"TutorialEdgeBasedInitialization/Assets/Custom/tracking/Tracking.xml");
+		boolean result = setTrackingConfiguration("TutorialEdgeBasedInitialization/Assets/Custom/tracking/Tracking.xml");
 
 		if (!result)
 			MetaioDebug.log(Log.ERROR, "Failed to load tracking configuration.");
